@@ -1,0 +1,5 @@
+fix_contacts.py
+
+A quick script I hacked together over a weekend to fix a contact import problem that I was having with Google Contacts.
+
+I had transferred my contacts from an LG dumbphone to a Nexus One, at which point I synced with Google Contacts. Unfortunately, all data about the distinction between first and last names was lost, and thus the idea for this script was born.
