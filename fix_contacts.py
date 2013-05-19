@@ -8,6 +8,8 @@ def fix_contacts(filename = "sanitized_google.csv"):
 
         with open('to_import.csv', 'wb') as writefile:
             contact_writer = csv.writer(writefile, delimiter = ",")
+
+            # deal with first row - TODO come up with better way to do this
             first = True
             for row in contact_reader:
                 if first:
@@ -26,6 +28,9 @@ def fix_contacts(filename = "sanitized_google.csv"):
                 if not row[1]:
 
                     tokens = string.split(row[0])
+
+                    # only reprocess if the name can be easily split into 
+                    # first and last name
                     if len(tokens) == 2:
                         row[1] = tokens[0]
                         row[3] = tokens[1]
@@ -40,10 +45,11 @@ def fix_contacts(filename = "sanitized_google.csv"):
 if __name__ == "__main__":
     fix_contacts()
 
-def sanitize(filename = "google.csv"):
+# routine to run if you encounter null character errors
+def sanitize(filename = "google.csv", sanitized_filename="sanitized_google.csv"):
     fi = open(filename, 'rb')
     data = fi.read()
     fi.close()
-    fo = open('sanitized_google.csv', 'wb')
+    fo = open(sanitized_filename, 'wb')
     fo.write(data.replace('\x00', ''))
     fo.close()

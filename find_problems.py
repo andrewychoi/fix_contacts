@@ -17,7 +17,9 @@ def find_problems(filename = "google.csv"):
                 tokens = string.split(row[0])
                 if len(tokens) == 2:
 
-                    print row
+                    # print row
+
+                    # row 1 is first name, row 3 is last name
                     row[1] = tokens[0]
                     row[3] = tokens[1]
                     
@@ -29,10 +31,12 @@ def find_problems(filename = "google.csv"):
 if __name__ == "__main__":
     find_problems()
 
-def sanitize(filename = "google.csv"):
+
+# routine to run if you encounter null character errors
+def sanitize(filename = "google.csv", sanitized_filename="sanitized_google.csv"):
     fi = open(filename, 'rb')
     data = fi.read()
     fi.close()
-    fo = open('sanitized_google.csv', 'wb')
+    fo = open(sanitized_filename, 'wb')
     fo.write(data.replace('\x00', ''))
     fo.close()
